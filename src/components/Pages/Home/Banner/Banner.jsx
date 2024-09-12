@@ -80,7 +80,6 @@ const Banner = () => {
                                 <button className="btn btn-outline btn-secondary">Secondary</button>
                             </div>
                         </div>
-
                     </div>
                     <div className="absolute left-5 right-5 bottom-0 flex -translate-y-1/2 transform justify-end">
                         <a href="#slide3" className="btn btn-circle mr-5">❮</a>
