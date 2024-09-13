@@ -9,7 +9,6 @@ const Services = () => {
         .then(res=>res.json())
         .then(data=>setServices(data))
     },[])
-    console.log(services);
     return (
         <div className="container mx-auto py-10">
             <div className="text-center">
@@ -19,7 +18,7 @@ const Services = () => {
             </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
                 {
-                    services.map(service=><Service key={service._id} service={service}></Service>)
+                    services?.map(service=><Service key={service._id} service={service}></Service>)
                 }
             </div>
         </div>
