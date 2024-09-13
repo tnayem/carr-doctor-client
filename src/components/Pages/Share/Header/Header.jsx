@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../../../assets/icons/logo.svg"
 
 
 const Header = () => {
     const navItems = <>
-        <li><Link to='/'>Home</Link></li>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/login'>Login</NavLink></li>
     </>
     return (
         <div className="container mx-auto">
