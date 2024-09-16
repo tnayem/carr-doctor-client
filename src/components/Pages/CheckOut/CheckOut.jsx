@@ -1,9 +1,9 @@
-import { useLoaderData } from "react-router-dom";
+
 
 
 const CheckOut = () => {
-    const bookDetails = useLoaderData()
-    const { _id, title, price, img } = bookDetails
+    // const bookDetails = useLoaderData()
+    // const { _id, title, price, img } = bookDetails
     const handleCheckOut = e => {
         e.preventDefault()
         const form = e.target
