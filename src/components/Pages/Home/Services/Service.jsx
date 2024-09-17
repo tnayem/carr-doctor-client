@@ -16,7 +16,7 @@ const Service = ({ service }) => {
                 <p className='text-orange-600 font-semibold'>Price : ${price}</p>
             </div>
             <div className="card-actions justify-end">
-                <Link to={`/bookservice/${_id}`}><button className="btn btn-primary">Buy Now</button></Link>
+                <Link to={`/bookservice/${_id}`}><button className="btn btn-primary">Book Now</button></Link>
             </div>
         </div>
     );

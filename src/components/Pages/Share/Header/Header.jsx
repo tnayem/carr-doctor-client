@@ -9,7 +9,10 @@ const Header = () => {
     const navItems = <>
         <li><NavLink className='mr-2' to='/'>Home</NavLink></li>
         {
-            user?.email ? <li onClick={()=>logOut()}><button>LogOut</button></li>
+            user?.email ? <>
+            <li><NavLink className='mr-2' to={`/booking/${user?.email}`}>My Bookings</NavLink></li>
+            <li onClick={()=>logOut()}><button>LogOut</button></li>
+            </>
             :
             <li><NavLink to='/login'>Login</NavLink></li>
         }
