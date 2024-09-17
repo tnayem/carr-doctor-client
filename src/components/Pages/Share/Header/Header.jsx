@@ -1,11 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../../assets/icons/logo.svg"
+import { useContext } from "react";
+import { AuthContext } from "../../../../providers/AuthProvider";
 
 
 const Header = () => {
+    const {user,logOut} = useContext(AuthContext)
     const navItems = <>
-        <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/login'>Login</NavLink></li>
+        <li><NavLink className='mr-2' to='/'>Home</NavLink></li>
+        {
+            user?.email ? <li onClick={()=>logOut()}><button>LogOut</button></li>
+            :
+            <li><NavLink to='/login'>Login</NavLink></li>
+        }
+        
+        
     </>
     return (
         <div className="container mx-auto">
