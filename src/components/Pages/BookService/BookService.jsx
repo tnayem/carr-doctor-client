@@ -13,15 +13,27 @@ const BookService = () => {
         const name = form.name.value
         const date = form.date.value
         const email = user?.email
-        const amount = form.amount.value
+        const price = form.amount.value
         const bookingDetails = {
             name,
             date,
             email,
-            amount,
-            service:_id
+            price,
+            service_id:_id,
+            service:title,
+            img
         }
-        console.log(bookingDetails);
+        fetch('http://localhost:5000/bookings',{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(bookingDetails)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+        })
     }
     return (
         <div className="md:mx-40">
@@ -51,7 +63,7 @@ const BookService = () => {
                             <label className="label">
                                 <span className="label-text">Due Amount</span>
                             </label>
-                            <input type="amount" name="amount" placeholder="Due Amount" className="input input-bordered" required />
+                            <input defaultValue={price} type="number" name="amount" placeholder="Due Amount" className="input input-bordered" required />
                         </div>
                     </div>
                     <div className="form-control mt-6">
