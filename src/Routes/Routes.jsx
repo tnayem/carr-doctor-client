@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         },
         {
           path:'/booking/:email',
-          element:<Bookings></Bookings>,
+          element:<PrivateRouts><Bookings></Bookings></PrivateRouts>,
           loader:({params})=>fetch(`http://localhost:5000/booking/${params.email}`)
         }
       ]
