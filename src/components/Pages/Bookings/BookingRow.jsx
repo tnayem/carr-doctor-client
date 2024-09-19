@@ -1,12 +1,13 @@
 
 
-const BookingRow = ({ booking }) => {
+const BookingRow = ({ booking,handleDelete}) => {
     const { _id, name, price, service, img } = booking
+    
     return (
         <tr>
             <th>
                 <label>
-                    <button>X</button>
+                    <button onClick={()=>handleDelete(_id)}>X</button>
                 </label>
             </th>
             <td>
