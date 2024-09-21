@@ -55,21 +55,6 @@ const Bookings = () => {
         <div className="container mx-auto">
             <div className="overflow-x-auto">
                 <table className="table">
-                    {/* head */}
-                    {/* <thead>
-                        <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
-                            <th>Product Name and Image</th>
-                            <th>Price</th>
-                            <th>Date</th>
-                            <th>Favorite Color</th>
-                            <th></th>
-                        </tr>
-                    </thead> */}
                     <tbody>
                         {/* row 1 */}
                         {
