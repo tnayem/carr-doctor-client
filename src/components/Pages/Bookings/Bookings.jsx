@@ -2,6 +2,7 @@
 import BookingRow from "./BookingRow";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import axios from "axios";
 
 
 const Bookings = () => {
@@ -10,10 +11,12 @@ const Bookings = () => {
     // console.log(bookings);
     const [bookings, setBookings] = useState(null)
     useEffect(() => {
-        fetch(`http://localhost:5000/booking/${user.email}`)
-            .then(res => res.json())
-            .then(data => setBookings(data))
-    }, [bookings])
+        const url = `http://localhost:5000/bookings?email=${user?.email}`
+        axios.get(url, { withCredentials: true })
+            .then(res => {
+                setBookings(res.data);
+            });
+    }, [user.email])
     // Handle Delete 
     const handleDelete = (id) => {
         const procced = confirm('Are you sure you want to delete this')
@@ -27,29 +30,29 @@ const Bookings = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
-                    if(data.deletedCount>0){
-                        const remainingBooking = bookings.filter(booking=>booking._id != id)
+                    if (data.deletedCount > 0) {
+                        const remainingBooking = bookings.filter(booking => booking._id != id)
                         setBookings(remainingBooking)
                     }
                 })
         }
     }
     // Handle Booking Confirm 
-    const handleBookingConfirm = id =>{
-        fetch(`http://localhost:5000/booking/${id}`,{
-            method:'PATCH',
-            headers:{
-                'content-type':'application/json'
+    const handleBookingConfirm = id => {
+        fetch(`http://localhost:5000/booking/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
             },
-            body: JSON.stringify({status:'confirm'})
+            body: JSON.stringify({ status: 'confirm' })
         })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-            if(data.modifiedCount>0){
-                //
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    //
+                }
+            })
     }
     return (
         <div className="container mx-auto">

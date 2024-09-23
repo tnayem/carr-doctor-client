@@ -3,26 +3,34 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from '../../../assets/images/login/login.svg'
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import axios from "axios";
 
 const Login = () => {
-    const {logIn} = useContext(AuthContext)
+    const { logIn } = useContext(AuthContext)
     const location = useLocation()
     const navigate = useNavigate()
-    console.log(location);
-    const handleSubmit = e =>{
+    const handleSubmit = e => {
         e.preventDefault()
-        const form = e.target 
+        const form = e.target
         const email = form.email.value
         const password = form.password.value
-        logIn(email,password)
-        .then(result=>{
-            const user= result.user 
-            console.log(user);
-            navigate(location?.state ? location.state : '/')
-        })
-        .catch(error=>{
-            console.error(error)
-        })
+        logIn(email, password)
+            .then(result => {
+                const logedInUser = result.user
+                console.log(logedInUser);
+                const user = { email }
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then(data => {
+                        console.log(data.data);
+                        if (data.data.success) {
+                            navigate(location?.state ? location.state : '/')
+                        }
+                    })
+
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
     return (
         <div className="container mx-auto">
@@ -32,7 +40,7 @@ const Login = () => {
                         <img src={img} alt="Image" />
                     </div>
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
-                    <h1 className="text-4xl font-bold text-center">Login now!</h1>
+                        <h1 className="text-4xl font-bold text-center">Login now!</h1>
                         <form onSubmit={handleSubmit} className="card-body">
                             <div className="form-control">
                                 <label className="label">
@@ -55,9 +63,9 @@ const Login = () => {
                         </form>
                         <p className="text-center">Or Sign In with</p>
                         <div className="text-5xl flex justify-around w-3/4 mx-auto my-5">
-                        <Link><FaFacebook /></Link>
-                        <Link><FaLinkedinIn /></Link>
-                        <Link><FaGoogle /></Link>
+                            <Link><FaFacebook /></Link>
+                            <Link><FaLinkedinIn /></Link>
+                            <Link><FaGoogle /></Link>
                         </div>
                         <p className="text-center">Haven t an account? <Link to='/signup' className="text-[#FF3811]">Sign Up</Link></p>
                     </div>

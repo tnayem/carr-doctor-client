@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useLoaderData } from "react-router-dom";
+import axios from "axios";
 
 
 const BookService = () => {
@@ -23,16 +24,20 @@ const BookService = () => {
             service:title,
             img
         }
-        fetch('http://localhost:5000/bookings',{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(bookingDetails)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
+        // fetch('http://localhost:5000/bookings',{
+        //     method:"POST",
+        //     headers:{
+        //         "Content-Type":"application/json"
+        //     },
+        //     body: JSON.stringify(bookingDetails)
+        // })
+        // .then(res=>res.json())
+        // .then(data=>{
+        //     console.log(data);
+        // })
+        axios.post('http://localhost:5000/bookings',bookingDetails)
+        .then(res=>{
+            console.log(res.data);
         })
     }
     return (
